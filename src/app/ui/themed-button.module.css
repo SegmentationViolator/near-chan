@@ -1,0 +1,48 @@
+.themedButton {
+    border-radius: 24px;
+    border-style: solid;
+    border-width: 2px;
+    color: var(--background);
+    min-width: 8ch;
+    transition: background .4s, color .4s;
+}
+
+.themedButton:hover {
+    background: var(--background);
+}
+
+.plain {
+    background: var(--foreground);
+    border-color: var(--foreground);
+}
+
+.plain:hover {
+    color: var(--foreground);
+}
+
+.primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.primary:hover {
+    color: var(--primary);
+}
+
+.secondary {
+    background: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.secondary:hover {
+    color: var(--secondary);
+}
+
+.tertiary {
+    background: var(--tertiary);
+    border-color: var(--tertiary);
+}
+
+.tertiary:hover {
+    color: var(--tertiary);
+}
