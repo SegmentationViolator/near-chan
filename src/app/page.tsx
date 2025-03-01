@@ -27,7 +27,8 @@ import nightlyIconUrl from "@near-wallet-selector/nightly/assets/nightly.png";
 import senderIconUrl from "@near-wallet-selector/sender/assets/sender-icon.png";
 import welldoneIconUrl from "@near-wallet-selector/welldone-wallet/assets/welldone-wallet.png";
 import { SignMessageMethod, Wallet } from "@near-wallet-selector/core/src/lib/wallet";
-import { Auth, authenticate } from "@/app/lib/auth";
+import { Auth, authenticate, LOGIN_MESSAGE } from "@/app/lib/auth";
+import { parseHashParams } from "./lib/hashParams";
 
 const wallets: Array<{ name: string, iconUrl: StaticImageData, link: string }> = [
     { name: "Meteor Wallet", iconUrl: meteorIconUrl, link: "https://meteorwallet.app/" },
@@ -85,6 +86,37 @@ export default function ConnectWallet() {
 
     useEffect(() => {
         async function getAuth() {
+            let hash = document.location.hash.substring(1);
+            if (hash.length != 0) {
+                const hashParams = parseHashParams(hash);
+                const searchParams = new URLSearchParams(document.location.search.substring(1));
+
+                const accountId = hashParams.get("accountId");
+                const nonce = searchParams.get("nonce");
+                const publicKey = hashParams.get("publicKey");
+                const signature = hashParams.get("signature");
+
+                if (
+                    accountId == undefined ||
+                    nonce == undefined ||
+                    publicKey == undefined ||
+                    signature == undefined
+                ) {
+                    document.location.href = "http://" + document.location.host + document.location.pathname;
+                    return;
+                }
+
+                setAuth({
+                    signature: signature,
+                    accountId: accountId,
+                    publicKey: publicKey,
+                    message: LOGIN_MESSAGE,
+                    nonce: Buffer.from(nonce),
+                    recipient: accountId,
+                });
+                return;
+            }
+
             const newAuth = await authenticate(wallet!);
             setAuth(newAuth);
         }
