@@ -2,13 +2,15 @@ import { MouseEventHandler } from "react";
 import styles from "@/app/ui/themed-button.module.css"
 
 export default function ThemedButton({
-    text,
+    children,
+    classes,
+    onClick,
     theme,
-    handler,
 }: Readonly<{
-    text: string,
+    children: React.ReactNode;
+    classes?: string,
     theme?: "primary" | "secondary" | "tertiary",
-    handler?: MouseEventHandler<HTMLButtonElement>,
+    onClick?: MouseEventHandler<HTMLButtonElement>,
 }>) {
     let className = styles.plain;
 
@@ -25,6 +27,6 @@ export default function ThemedButton({
     }
 
     return (
-        <button className={`text-base p-2 ${styles.themedButton} ${className}`} onClick={handler}>{text}</button>
+        <button className={`text-base p-2 ${classes} ${styles.themedButton} ${className}`} onClick={onClick}>{children}</button>
     )
 }

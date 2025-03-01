@@ -9,6 +9,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@echristian/edge-tts": "^0.0.14",
         "@near-wallet-selector/bitte-wallet": "^8.9.16",
         "@near-wallet-selector/core": "^8.9.16",
         "@near-wallet-selector/here-wallet": "^8.9.16",
@@ -22,7 +23,8 @@
         "near-api-js": "^5.0.1",
         "next": "15.1.6",
         "react": "^19.0.0",
-        "react-dom": "^19.0.0"
+        "react-dom": "^19.0.0",
+        "react-feather": "^2.0.10"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
